@@ -39,7 +39,7 @@ class AddQuestion extends React.Component {
     }
 
     onSubmit(navigate, card, title) {
-        if (card.question==='' || card.answer===''){
+        if (card.question.trim()==='' || card.answer.trim()===''){
             alert('Enter question and answer');
             return;
         }

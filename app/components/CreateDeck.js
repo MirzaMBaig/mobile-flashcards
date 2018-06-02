@@ -26,6 +26,10 @@ class CreateDeck extends React.Component {
     }
 
     onSubmit(title) {
+        if (title.trim()===''){
+            alert('Please provide deck name');
+            return; 
+        }
         saveDeckTitle(title);
         this.props.navigation.navigate('DeckDetail', {title:title})
     }
