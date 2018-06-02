@@ -13,7 +13,7 @@ class AddQuestion extends React.Component {
     render() {
         const { title } = this.props.navigation.state.params
         const { navigate } = this.props.navigation
-        
+
         return (
             <View>
                 <Text style={styles.title}>Add Question</Text>
@@ -43,8 +43,9 @@ class AddQuestion extends React.Component {
             alert('Enter question and answer');
             return;
         }
-        addCardToDeck(title, card);
-        navigate('DeckDetail', { title: title })
+        addCardToDeck(title, card).then(u=> {
+            navigate('DeckDetail', { title: title })
+        })
     }
 
 }

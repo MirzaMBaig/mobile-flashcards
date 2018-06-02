@@ -17,7 +17,7 @@ export function saveDeckTitle(title) {
 }
 
 export function addCardToDeck(title, card) {
-  getDeck(title).then(deck => {
+  return getDeck(title).then(deck => {
     deck.questions.push(card);
     AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
       [title]: deck
@@ -43,6 +43,8 @@ export function removeEntry(key) {
 }
 
 function filterDecks(results, title) {
+  console.log('filterDecks');
+  console.log(results[title]);
   return results === null || title === null
     ? {title:'not defined', questions:[]}
     : results[title];

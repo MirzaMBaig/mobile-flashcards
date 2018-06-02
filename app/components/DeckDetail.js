@@ -19,7 +19,7 @@ class DeckDetail extends React.Component {
     }
 
     componentWillReceiveProps(prevProps) {
-        let title = this.props?this.props.navigation.state.params.title:undefined
+        let title = this.props.navigation?this.props.navigation.state.params.title:undefined
         if (title) {
             getDeck(title).then(deck => {
                 this.setState({ deck: deck, title: title })

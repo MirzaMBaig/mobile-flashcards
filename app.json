@@ -6,9 +6,9 @@
     "description": "Challenge it",
     "slug": "flashcards",
     "version": "1.0",
-    "icon": "/no.png",
+    "icon": "./no.png",
     "notification": {
-      "icon": "no.png"
+      "icon": "./no.png"
     },
     "ios": {
       "bundleIdentifier": "org.flashcards.exp"

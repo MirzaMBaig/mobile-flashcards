@@ -27,7 +27,7 @@ class CreateDeck extends React.Component {
 
     onSubmit(title) {
         saveDeckTitle(title);
-        this.props.navigation.navigate('Home')
+        this.props.navigation.navigate('DeckDetail', {title:title})
     }
 
 }
