@@ -28,27 +28,28 @@ class DeckList extends React.Component {
 
     render() {
         const { navigate } = this.props.navigation;
+        const { decks } = this.state;
         return (
             <ScrollView>
                 <View style={styles.container}>
-                    {this.state.decks &&
-                        Object.keys(this.state.decks).map(deck => {
+                    {decks &&
+                        Object.keys(decks).map(deck => {
                             return (
                                 <View key={deck} style={styles.item}>
-                                    <TouchableOpacity key={deck} onPress={() => this.openDeck(navigate, this.state.decks[deck].title, this.state.decks[deck].length)}>
+                                    <TouchableOpacity key={deck} onPress={() => this.openDeck(navigate, decks[deck].title, decks[deck].length)}>
                                         <Text style={[styles.container, { marginBottom: 10, fontSize: 20 }]} >
-                                            Quiz: {this.state.decks[deck].title}
+                                            Quiz: {decks[deck].title}
 
                                         </Text>
-                                        <Text style={[styles.container, { fontSize: 14}]}>
-                                            Number of Questions: {this.state.decks[deck].questions ? this.state.decks[deck].questions.length : 0}
+                                        <Text style={[styles.container, { fontSize: 14 }]}>
+                                            Number of Questions: {decks[deck].questions ? decks[deck].questions.length : 0}
                                         </Text>
                                     </TouchableOpacity>
                                 </View>
                             )
                         })
                     }
-                    {!this.state.decks &&
+                    {!decks &&
                         <Text style={styles.noDataText}>
                             No Deck Available
                         </Text>

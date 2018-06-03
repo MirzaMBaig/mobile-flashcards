@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View , StatusBar} from 'react-native';
 import DeckList from './app/components/DeckList'
 import AddQuestion from './app/components/AddQuestion'
@@ -85,7 +85,7 @@ const MainNavigator = createStackNavigator({
   }
 })
 
-export default class App extends React.Component {
+export default class App extends Component {
   
   componentDidMount() {
     setLocalNotification();
