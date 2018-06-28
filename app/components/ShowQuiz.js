@@ -1,7 +1,8 @@
 import React from 'react'
-import { Modal, View, Text, TextInput, Button, TouchableOpacity, TouchableHighlight, StyleSheet } from 'react-native'
-import TextButton from './TextButton'
+import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import { getDeck } from '../utils/api';
+import { StyleSheets } from '../utils/styles';
+import { gray, lightGrayishBlue } from '../utils/colors'
 
 class ShowQuiz extends React.Component {
 
@@ -43,7 +44,7 @@ class ShowQuiz extends React.Component {
 
         return (
             <View>
-        
+
                 {
                     questions.length &&
                     <View>
@@ -58,11 +59,11 @@ class ShowQuiz extends React.Component {
                         />
 
                         <TouchableOpacity onPress={() => this.onSubmit(navigate)}>
-                            <Text style={[styles.createDeckButton, { marginTop: 30, marginBottom: 10 }]}>Submit</Text>
+                            <Text style={[StyleSheets.textButton, StyleSheets.createDeckButton]}>Submit</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity onPress={() => this.showAnswer(questions[counter])}>
-                            <Text style={[styles.createDeckButton]}>Show Answer</Text>
+                            <Text style={[StyleSheets.textButton, StyleSheets.createDeckButton]}>Show Answer</Text>
                         </TouchableOpacity>
                     </View>
                 }
@@ -71,10 +72,10 @@ class ShowQuiz extends React.Component {
                     {!questions.length &&
                         <Text style={styles.noDataText}>Please add questions to show up here</Text>
                     }
-                    {correct !== null &&
-                        <Text style={styles.title}>Your answer is {correct ? 'correct' : 'wrong'}</Text>
+                    {correct &&
+                        <Text style={styles.title}>Your answer is {correct}</Text>
                     }
-                    {score !== null &&
+                    {score &&
                         <Text style={styles.title}>Your score is  {score}</Text>
                     }
                     <View style={{ marginTop: 22 }}>
@@ -94,7 +95,7 @@ class ShowQuiz extends React.Component {
                                         <Text style={[styles.question, { paddingLeft: 10 }]}>{questions[this.state.counter].answer}</Text>
 
                                         <TouchableOpacity onPress={() => this.setModalVisible(!this.state.modalVisible)}>
-                                            <Text style={[styles.createDeckButton, { padding: 10, margin: 20 }]}>Close</Text>
+                                        <Text style={[StyleSheets.textButton, StyleSheets.createDeckButton]}>Close</Text>
                                         </TouchableOpacity>
                                     </View>
                                 </View>
@@ -120,14 +121,14 @@ class ShowQuiz extends React.Component {
 
         if (questions[counter].answer === answer) {
             score++;
-            correct = true;
+            correct = 'correct';
         } else {
-            correct = false;
+            correct = 'wrong';
         }
         answer = ''
         counter++;
         if (counter == questions.length) {
-            let percentage = score * 100 / questions.length;
+            let percentage = (score * 100 / questions.length).toFixed(2);
 
             navigate('QuizResult', { score: score, percentage: percentage, title: this.state.title })
             this.reset();
@@ -142,7 +143,7 @@ class ShowQuiz extends React.Component {
 const styles = StyleSheet.create({
     title: {
         height: 40,
-        borderColor: 'gray',
+        borderColor: gray,
         padding: 10,
         margin: 20,
         textAlign: 'center',
@@ -169,7 +170,7 @@ const styles = StyleSheet.create({
     },
     answer: {
         height: 50,
-        backgroundColor: '#f8f9fa',
+        backgroundColor: lightGrayishBlue,
         borderRadius: 5,
         padding: 2,
         marginLeft: 2,
@@ -186,15 +187,8 @@ const styles = StyleSheet.create({
     },
     container: {
         height: 40,
-        borderColor: 'gray',
+        borderColor: gray,
         borderWidth: 1
-    },
-    createDeckButton: {
-        padding: 10,
-        margin: 20, color: '#fff',
-        backgroundColor: '#343a40',
-        borderColor: '#343a40',
-        textAlign: 'center'
     },
     noDataText: {
         fontSize: 20,

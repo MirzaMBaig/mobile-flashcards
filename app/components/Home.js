@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import TextButton from './TextButton'
 import DeckList from './DeckList'
+import { white, purple, grayishBlue } from '../utils/colors'
 
 export default class App extends React.Component {
 
@@ -12,27 +12,26 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <TextButton style={styles.createDeckButton} onPress={this.createDeck}>
-          Create Deck
-          </TextButton>
+        <TouchableOpacity onPress={this.createDeck}>
+          <Text style={[styles.createDeckButton]}>
+            Create Deck
+          </Text>
+        </TouchableOpacity>
+
         <DeckList {...this.props} />
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 10
-  },
+styles = StyleSheet.create({
   createDeckButton: {
-    padding: 10,
-    margin: 20, color: '#fff',
-    backgroundColor: '#343a40',
-    borderColor: '#343a40'
+    padding: 30,
+    margin: 5, 
+    textAlign: 'center',
+    color: purple,
+    color: white,
+    backgroundColor: grayishBlue,
+    borderColor: grayishBlue
   }
 });

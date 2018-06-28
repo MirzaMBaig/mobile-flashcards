@@ -1,10 +1,6 @@
 import React from 'react'
-import { View, Text, TextInput, Button, TouchableOpacity, StyleSheet } from 'react-native'
-import TextButton from './TextButton'
-import { submitEntry } from '../utils/api';
-import { fetchDeckByTitle } from '../utils/api';
-import {purple} from '../utils/colors'
-import DeckDetail from './DeckDetail';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { StyleSheets } from '../utils/styles';
 
 class QuizResult extends React.Component {
 
@@ -12,25 +8,28 @@ class QuizResult extends React.Component {
 
         const { score, percentage, title } = this.props.navigation.state.params
         const { navigate } = this.props.navigation
+
         return (
             <View>
                 <Text style={styles.results}>Your score is {score}</Text>
                 <Text style={styles.results}>Your percentage is {percentage}</Text>
 
-                <TextButton style={styles.createDeckButton} onPress={() => this.openDeckList(navigate, 'ShowQuiz')}>
-                    Restart Quiz
-                </TextButton>
-                <TextButton style={styles.createDeckButton} onPress={() => this.openDeckList(navigate, 'DeckDetail', title)}>
-                    Back to Deck
-                </TextButton>
+                <TouchableOpacity onPress={() => this.openDeckList(navigate, 'ShowQuiz')}>
+                    <Text style={[StyleSheets.textButton, StyleSheets.createDeckButton]}>Restart Quiz</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => this.openDeckList(navigate, 'DeckDetail', title)}>
+                    <Text style={[StyleSheets.textButton, StyleSheets.createDeckButton]}>Back to Deck</Text>
+                </TouchableOpacity>
+
             </View>
         )
     }
 
     openDeckList(navigate, where, title) {
-        if (title){
-            navigate(where, {title:title})
-        }else{
+        if (title) {
+            navigate(where, { title: title })
+        } else {
             navigate(where)
         }
     }
@@ -38,27 +37,6 @@ class QuizResult extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    title: {
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-
-    },
-    container: {
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1
-    },
-    reset: {
-        textAlign: 'center',
-        color: purple,
-    },
-    createDeckButton: {
-        padding: 10,
-        margin: 20, color: '#fff',
-        backgroundColor: '#343a40',
-        borderColor: '#343a40'
-    },
     results: {
         height: 30,
         fontSize: 20,
@@ -77,7 +55,7 @@ const styles = StyleSheet.create({
             width: 0,
             height: 3
         },
-    },
+    }
 });
 
 export default QuizResult;

@@ -1,7 +1,8 @@
 import React from 'react'
-import { View, Text, TextInput, Button, TouchableOpacity, StyleSheet } from 'react-native'
-import TextButton from './TextButton'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import { saveDeckTitle } from '../utils/api';
+import { StyleSheets } from '../utils/styles';
+import { gray } from '../utils/colors';
 
 class CreateDeck extends React.Component {
 
@@ -11,67 +12,41 @@ class CreateDeck extends React.Component {
     render() {
         return (
             <View>
-                <Text style={styles.title}>Create Deck</Text>
+                <Text style={StyleSheets.title}>Create Deck</Text>
                 <TextInput
-                    style={styles.item}
+                    style={StyleSheets.item}
                     onChangeText={(text) => this.setState({ text })}
                     value={this.state.text}
                     placeholder='Enter Deck title'
                 />
-                <TextButton style={[styles.createDeckButton,{ padding: 10, margin: 20 }]} onPress={() => this.onSubmit(this.state.text)}>
-                    Add Deck
-                </TextButton>
+
+                <TouchableOpacity onPress={() => this.onSubmit(this.state.text)}>
+                    <Text style={[StyleSheets.textButton, StyleSheets.createDeckButton]}>
+                        Add Deck
+                    </Text>
+                </TouchableOpacity>
             </View>
         )
     }
 
     onSubmit(title) {
-        if (title.trim()===''){
+        if (title.trim() === '') {
             alert('Please provide deck name');
-            return; 
+            return;
         }
         saveDeckTitle(title);
-        this.props.navigation.navigate('DeckDetail', {title:title})
+        this.props.navigation.navigate('DeckDetail', { title: title })
     }
 
 }
 
 const styles = StyleSheet.create({
-    title: {
-        fontSize: 20,
-        paddingTop: 20,
-        paddingBottom: 20,
-        textAlign: 'center',
 
-    },
     container: {
         height: 40,
-        borderColor: 'gray',
+        borderColor: gray,
         borderWidth: 1
-    },
-    createDeckButton: {
-        padding: 10,
-        margin: 20, color: '#fff',
-        backgroundColor: '#343a40',
-        borderColor: '#343a40'
-    },
-    item: {
-        height: 50,
-        backgroundColor: '#f8f9fa',
-        borderRadius: 5,
-        padding: 2,
-        marginLeft: 2,
-        marginRight: 2,
-        marginTop: 2,
-        justifyContent: 'center',
-        shadowRadius: 3,
-        shadowOpacity: 0.8,
-        shadowColor: 'rgba(0, 0, 0, 0.24)',
-        shadowOffset: {
-            width: 0,
-            height: 3
-        },
-    },
+    }
 });
 
 export default CreateDeck;

@@ -1,8 +1,7 @@
 import React from 'react'
 import { View, ScrollView, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { red } from '../utils/colors'
-import TextButton from './TextButton'
 import { getDecks } from '../utils/api';
+import { lightGrayishBlue} from '../utils/colors'
 
 class DeckList extends React.Component {
 
@@ -70,13 +69,14 @@ const styles = StyleSheet.create({
     containerBody: {
         marginBottom: 20,
         padding: 5,
-        backgroundColor: '#f8f9fa',
-        borderColor: '#f8f9fa',
-        marginLeft: 2, marginBottom: 20,
+        backgroundColor: lightGrayishBlue,
+        borderColor: lightGrayishBlue,
+        marginLeft: 2,
+        marginBottom: 20,
         borderRadius: .25,
     },
     item: {
-        backgroundColor: '#f8f9fa',
+        backgroundColor: lightGrayishBlue,
         borderRadius: 16,
         padding: 20,
         marginLeft: 10,
